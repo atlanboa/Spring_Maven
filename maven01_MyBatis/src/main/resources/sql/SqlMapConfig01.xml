@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- <properties resource="sql/dbconn.properties"/> -->
+	
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	
+	<typeAliases>
+		<typeAlias type="ibatis.services.domain.User" alias="user"/>
+	</typeAliases>
+	
+<!-- 	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			<dataSource type="UNPOOLED">DRIVEN 방식은 UNPOOLED, DATASOURCE는 POOLED
+				<property name="driver" value="${jdbc.mysql.driver}"/>
+				<property name="url" value="${jdbc.mysql.url}"/>
+				<property name="username" value="${jdbc.mysql.username}"/>
+				<property name="password" value="${jdbc.mysql.password}"/>			
+			</dataSource>
+		</environment>
+	</environments> -->
+	<mappers>	
+		<mapper resource="sql/mybatis-userservice-mapping10.xml"/>			
+	</mappers>
+</configuration>

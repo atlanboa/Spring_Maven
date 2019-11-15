@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+<!--  classpath를 반드시 넣어줘야 한다.-->
+<context:property-placeholder location="classpath:sql/dbconn.properties"/>
+
+<!-- 1. DataSource 빈 등록 -->
+<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	<property name="driverClassName" value="${jdbc.mysql.driver}"/>
+	<property name="url" value="${jdbc.mysql.url}"/>
+	<property name="username" value="${jdbc.mysql.username}"/>
+	<property name="password" value="${jdbc.mysql.password}"/>
+</bean>
+
+<!-- 2. SqlSessionFactory 빈 등록 -->
+<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<property name="configLocation" value="classpath:sql/SqlMapConfig01.xml"/>
+	<property name="dataSource" ref="dataSource"/>
+</bean>
+
+<!-- 3. SqlSession 빈 등록  :: 반드시 생성자 주입-->
+<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+	<constructor-arg ref="sqlSessionFactoryBean"/>
+</bean>
+
+<context:component-scan base-package="ibatis.services.user.impl"></context:component-scan>
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FoodMapper">
+
+	<select id="select">
+		SELECT
+		code, name, supportpereat, calory, carbo,
+		protein, fat, sugar, natrium,
+		chole,
+		fattyacid, transfat, maker,
+		material, img, allergy
+		FROM
+		food
+	</select>
+
+	<select id="selectByFoodName" parameterType="string"
+		resultType="foodVO">
+		<include refid="select" />
+		WHERE name LIKE '%${value}%'
+	</select>
+
+	<select id="selectByFoodMaker" parameterType="string"
+		resultType="foodVO">
+		<include refid="select" />
+		WHERE maker LIKE '%${value}%'
+	</select>
+	<select id="selectByFoodMaterial" parameterType="string"
+		resultType="foodVO">
+		<include refid="select" />
+		WHERE material LIKE '%${value}%'
+	</select>
+	
+	<select id="selectByFoodCode" parameterType="string" resultType="foodVO">
+		<include refid="select" />
+		WHERE code = #{value}
+	</select>
+	
+	<insert id="insertFood" parameterType="foodVO">
+		
+	</insert>
+</mapper>

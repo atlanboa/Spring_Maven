@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserMapper">
+
+	<select id="select">
+		SELECT
+		id, pass, name, address, phone, allergy
+		FROM user
+	</select>
+
+	<insert id="insertUser" parameterType="userVO">
+		INSERT INTO user (id, pass, name, address, phone, allergy)
+		VALUES (#{id},#{pass},#{name},#{address},,#{phone}#{allergy})
+	</insert>
+	
+	<update id="updateUser" parameterType="userVO">
+		UPDATE user
+		SET pass = #{pass}, name=#{name}, address = #{address}, phone=#{phone}, allergy=#{allergy}
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="deleteUser" parameterType="userVO">
+		DELETE FROM user
+		WHERE id = #{value}
+	</delete>
+
+	<select id="login" parameterType="userVO" resultType="userVO">
+		<include refid="select"/>
+		WHERE id = #{id} AND pass = #{pass}
+	</select>
+</mapper>
